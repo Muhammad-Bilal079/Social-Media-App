@@ -4,6 +4,8 @@ import {
   Bookmark, Chat, Event, Group, HelpOutline, PlayCircleFilledOutlined,
   RssFeed, School, WorkOutline
 } from '@mui/icons-material'
+import {Users} from '../../dummyData'
+import Closefriend from '../closefriends/Closefriend'
 
 function Sidebar() {
   return (
@@ -52,20 +54,11 @@ function Sidebar() {
         <hr className='sidebarHr' />
 
         <ul className="sidebarFriendList">
-          <li className="sidebarFriend">
-            <img src="/assets/person/7.jpeg" alt="error" className='sidebarFiendImg' />
-            <span className="sidebarFriendName">Jan Doe</span>
-          </li>
+        
+        {Users.map((u)=>(
+          <Closefriend key={u.id} user={u}/>
+        ))}
 
-          <li className="sidebarFriend">
-            <img src="/assets/person/7.jpeg" alt="error" className='sidebarFiendImg' />
-            <span className="sidebarFriendName">Jan Doe</span>
-          </li>
-
-          <li className="sidebarFriend">
-            <img src="/assets/person/7.jpeg" alt="error" className='sidebarFiendImg' />
-            <span className="sidebarFriendName">Jan Doe</span>
-          </li>
 
         </ul>
 
