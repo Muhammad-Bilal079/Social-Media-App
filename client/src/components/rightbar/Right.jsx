@@ -4,6 +4,13 @@ import {Users} from '../../dummyData'
 import Online from '../online/Online'
 
 function Right({profile}) {
+  const process = {
+    env: {
+      REACT_APP_PUBLIC_FOLDER:  'http://localhost:5173/assets/'
+    }
+  };
+  
+  const PF = process.env.REACT_APP_PUBLIC_FOLDER
 
   const Homerightbar = () => {
     return (
@@ -50,32 +57,32 @@ function Right({profile}) {
       <div className="rightbarTitle">User Friends</div>
       <div className="rightbarFollowings">
         <div className="rightbarFollowing">
-        <img src="assets/person/1.jpeg" alt="" className="rightbarFollowingImg" />
+        <img src={`${PF}person/1.jpeg`} alt="" className="rightbarFollowingImg" />
         <span className="rightbarFollowingName">John Carter</span>
         </div>
 
         <div className="rightbarFollowing">
-        <img src="assets/person/2.jpeg" alt="" className="rightbarFollowingImg" />
+        <img src={`${PF}person/3.jpeg`} alt="" className="rightbarFollowingImg" />
         <span className="rightbarFollowingName">John Carter</span>
         </div>
 
         <div className="rightbarFollowing">
-        <img src="assets/person/9.jpeg" alt="" className="rightbarFollowingImg" />
+        <img src={`${PF}person/2.jpeg`} alt="" className="rightbarFollowingImg" />
         <span className="rightbarFollowingName">John Carter</span>
         </div>
 
         <div className="rightbarFollowing">
-        <img src="assets/person/4.jpeg" alt="" className="rightbarFollowingImg" />
+        <img src={`${PF}person/4.jpeg`} alt="" className="rightbarFollowingImg" />
         <span className="rightbarFollowingName">John Carter</span>
         </div>
 
         <div className="rightbarFollowing">
-        <img src="assets/person/5.jpeg" alt="" className="rightbarFollowingImg" />
+        <img src={`${PF}person/5.jpeg`} alt="" className="rightbarFollowingImg" />
         <span className="rightbarFollowingName">John Carter</span>
         </div>
 
         <div className="rightbarFollowing">
-        <img src="assets/person/8.jpeg" alt="" className="rightbarFollowingImg" />
+        <img src={`${PF}person/2.jpeg`} alt="" className="rightbarFollowingImg" />
         <span className="rightbarFollowingName">John Carter</span>
         </div>
       </div>

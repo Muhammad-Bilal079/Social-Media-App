@@ -6,6 +6,13 @@ import Right from '../../components/rightbar/Right';
 import Feed from '../../components/feed/Feed';
 
 function Profile() {
+    const process = {
+        env: {
+          REACT_APP_PUBLIC_FOLDER:  'http://localhost:5173/assets/'
+        }
+      };
+      
+      const PF = process.env.REACT_APP_PUBLIC_FOLDER
     return (
         <>
             <Topbar />
@@ -15,8 +22,8 @@ function Profile() {
 
                     <div className="profileRightTop">
                         <div className="profileCover">
-                        <img className='profileCoverImg' src="assets/post/3.jpeg" alt="" />
-                        <img className='profileUserImg' src="assets/person/11.jpeg" alt="" />
+                        <img className='profileCoverImg' src={`${PF}post/3.jpeg`} alt="" />
+                        <img className='profileUserImg' src={`${PF}person/1.jpeg`}alt="" />
                         </div>
                        
                        <div className="profileInfo">
@@ -27,6 +34,8 @@ function Profile() {
                     <div className="profileRightBottom">
                         <Feed />
                         <Right Profile/>
+                       
+                            
                     </div>
 
                 </div>

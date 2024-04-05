@@ -3,6 +3,15 @@ import './post.css'
 import { MoreVert } from '@mui/icons-material'
 import { Users } from '../../dummyData'
 
+// yeah env file ko acess karnay kay liay hai 
+const process = {
+    env: {
+      REACT_APP_PUBLIC_FOLDER:  'http://localhost:5173/assets/'
+    }
+  };
+
+const PF = process.env.REACT_APP_PUBLIC_FOLDER
+
 function Post({ post }) {
 const [like , setLike] = useState(post.like)
 const [Isliked , setIsliked] = useState(false)
@@ -29,7 +38,7 @@ const likeHandler = ()=>{
                 {/* post center area  */}
                 <div className="postCenter">
                     <span className="postText">{post?.desc}</span>
-                    <img className='postImg' src={post.photo} alt="" />
+                    <img className='postImg' src={PF+post.photo} alt="" />
                 </div>
                 {/* post bottom area  */}
                 <div className="postBottom">
