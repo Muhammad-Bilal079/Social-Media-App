@@ -25,6 +25,7 @@ const likeHandler = ()=>{
 
             <div className="postWrapper">
                 {/* top area  */}
+
                 <div className="postTop">
                     <div className="postTopLeft">
                         <img className='postProfileImg' src={Users.filter((u) => u.id === post.userId)[0].profilePicture} alt="" />

@@ -5,6 +5,7 @@ export const Users = [
     username: "Safak Kocaoglu",
   },
   {
+    
     id:2,
     profilePicture: "person/2.jpeg",
     username: "Janell Shrum",

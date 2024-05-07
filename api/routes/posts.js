@@ -101,17 +101,17 @@ routes.get('/:id', async function (req, res) {
 // }
 // is main jab hum user ki id dain gay to usnay jis jis ko follow kia hoga unsabka data la kardega
 
-routes.get('/timeline/data', async (req, res) => {
+routes.get('/timeline/:userId', async (req, res) => {
     // let postArray = [];
     try {
-        const currentUser = await User.findById(req.body.userId)
+        const currentUser = await User.findById(req.params.userId)
         const userPost = await Post.find({ userId: currentUser._id })
         const friendsPost = await Promise.all(
             currentUser.following.map((friendId) => {
                 return Post.find({ userId: friendId });
             })
         );
-        res.json(userPost.concat(...friendsPost));
+        res.status(200).json(userPost.concat(...friendsPost));
     } catch (error) {
         res.send(error.message)
     }

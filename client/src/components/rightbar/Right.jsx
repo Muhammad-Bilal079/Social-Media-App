@@ -82,7 +82,7 @@ function Right({profile}) {
         </div>
 
         <div className="rightbarFollowing">
-        <img src={`${PF}person/2.jpeg`} alt="" className="rightbarFollowingImg" />
+        <img src={`${PF}person/6.jpeg`} alt="" className="rightbarFollowingImg" />
         <span className="rightbarFollowingName">John Carter</span>
         </div>
       </div>
@@ -99,5 +99,6 @@ function Right({profile}) {
     </div>
   )
 }
+
 
 export default Right
