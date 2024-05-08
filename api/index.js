@@ -6,9 +6,11 @@ const morgan = require('morgan');
 const userRoutes = require("./routes/users.js")
 const authRoutes = require("./routes/auth.js")
 const postRoutes = require("./routes/posts.js")
+const cors = require('cors');
 
 const app = express();
 dotenv.config();
+app.use(cors())
 
 // connect mongoDB 
 mongoose.connect(process.env.MONGO_URL)   

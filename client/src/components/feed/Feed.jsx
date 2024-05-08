@@ -5,26 +5,29 @@ import Post from '../post/Post'
 import axios from 'axios'
 // import {Posts} from '../../dummyData'
 
-function Feed() {
+function Feed({username}) {
   const [posts ,setPosts] = useState([])
 
   useEffect(()=>{
     const fetchPost = async()=>{
-     const res = await axios.get('posts/timeline/65ef89de0ae4314fdd711662')
-     console.log(res);
+     const res = username? 
+     await axios.get('http://localhost:5000/api/posts/profile'+ username) :
+      await axios.get('http://localhost:5000/api/posts/timeline/65ef89ce0ae4314fdd711660')
+    //  console.log(res);
+   setPosts(res.data)
     }
     fetchPost()
-  },[])
-
+  },[username])
+ console.log(posts);
 
   return (
     <div className='feed'>
 
       <div className="feedWrapper">
         <Share/>
-        {/* {Posts.map((p)=>(
-              <Post key={p.id} post={p}/>
-        ))} */}
+        {posts.map((p)=>(
+              <Post key={p._id} post={p}/>
+        ))}
       
         
         

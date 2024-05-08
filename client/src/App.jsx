@@ -19,7 +19,7 @@ function App() {
 </Routes>
 
  {/* main home componenet  */}
- <Home />
+ {/* <Home /> */}
 
 
     </>

@@ -1,25 +1,39 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import './post.css'
 import { MoreVert } from '@mui/icons-material'
-import { Users } from '../../dummyData'
+import axios from 'axios';
+import {Link} from 'react-router-dom'
+import { format } from 'timeago.js'
+// timeago.js help karta hai time batanay main aky post kitni dair pehlay upload hoi hai 
 
 // yeah env file ko acess karnay kay liay hai 
 const process = {
     env: {
-      REACT_APP_PUBLIC_FOLDER:  'http://localhost:5173/assets/'
+        REACT_APP_PUBLIC_FOLDER: 'http://localhost:5173/assets/'
     }
-  };
+};
 
 const PF = process.env.REACT_APP_PUBLIC_FOLDER
 
 function Post({ post }) {
-const [like , setLike] = useState(post.like)
-const [Isliked , setIsliked] = useState(false)
+    const [like, setLike] = useState(post.likes.length)
+    const [Isliked, setIsliked] = useState(false)
+    const [user, setUser] = useState({})
 
-const likeHandler = ()=>{
-    setLike(Isliked ? like-1 : like+1)
-    setIsliked(!Isliked)
-}
+    // console.log(post.userId);
+    useEffect(() => {
+        const fetchuser = async () => {
+            const res = await axios.get(`http://localhost:5000/api/users/${post.userId} `)
+             console.log(res);
+            setUser(res.data)
+        }
+        fetchuser()
+    }, [post.userId])
+
+    const likeHandler = () => {
+        setLike(Isliked ? like - 1 : like + 1)
+        setIsliked(!Isliked)
+    }
     return (
         <div className='post'>
 
@@ -28,9 +42,11 @@ const likeHandler = ()=>{
 
                 <div className="postTop">
                     <div className="postTopLeft">
-                        <img className='postProfileImg' src={Users.filter((u) => u.id === post.userId)[0].profilePicture} alt="" />
-                        <span className="postUsername">{Users.filter((u) => u.id === post.userId)[0].username}</span>
-                        <span className="postDate">{post.date}</span>
+                        <Link to={`profile/${user.username}`}>
+                        <img className='postProfileImg' src={user.profilePicture || PF + 'person/Noawatar.jpeg'} alt="" />
+                        </Link>
+                        <span className="postUsername">{user.username}</span>
+                        <span className="postDate">{format(post.createdAt)}</span>
                     </div>
                     <div className="postTopRight">
                         <MoreVert />
@@ -39,7 +55,7 @@ const likeHandler = ()=>{
                 {/* post center area  */}
                 <div className="postCenter">
                     <span className="postText">{post?.desc}</span>
-                    <img className='postImg' src={PF+post.photo} alt="" />
+                    <img className='postImg' src={PF + post.img} alt="" />
                 </div>
                 {/* post bottom area  */}
                 <div className="postBottom">

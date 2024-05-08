@@ -118,4 +118,17 @@ routes.get('/timeline/:userId', async (req, res) => {
 
 })
 
+// get user all posts 
+routes.get('/profile/:username', async (req, res) => {
+    // let postArray = [];
+    try {
+        const user = await User.findOne({ username: req.params.username })
+        const posts = await Post.find({ userId: user._id })
+        res.status(200).json(posts)
+    } catch (error) {
+        res.send(error.message)
+    }
+
+})
+
 module.exports = routes
