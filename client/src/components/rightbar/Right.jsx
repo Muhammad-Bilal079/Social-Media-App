@@ -3,7 +3,7 @@ import "./right.css"
 import {Users} from '../../dummyData'
 import Online from '../online/Online'
 
-function Right({profile}) {
+function Right({user}) {
   const process = {
     env: {
       REACT_APP_PUBLIC_FOLDER:  'http://localhost:5173/assets/'
@@ -40,17 +40,17 @@ function Right({profile}) {
 
         <div className="rightbarInfoItem">
         <span className="rightbarInfoKey">City : </span>
-        <span className="rightbarInfoValue">NewYork</span>
+        <span className="rightbarInfoValue">{user.city}</span>
         </div>
 
         <div className="rightbarInfoItem">
         <span className="rightbarInfoKey">From : </span>
-        <span className="rightbarInfoValue">bilal</span>
+        <span className="rightbarInfoValue">{user.from}</span>
         </div>
 
         <div className="rightbarInfoItem">
         <span className="rightbarInfoKey">Relationship : </span>
-        <span className="rightbarInfoValue">Single</span>
+        <span className="rightbarInfoValue">{user.relationship === 1 ? "single" :"maried" }</span>
         </div>
       </div>
       {/* user friends  */}
@@ -93,7 +93,7 @@ function Right({profile}) {
     <div className='rightbar'>
       <div className="rightbarWrapper">
         {/* <Profilerightbar/> */}
-        {profile ?<Profilerightbar/> : <Homerightbar/> }
+        {user ?<Profilerightbar/> : <Homerightbar/> }
       </div>
 
     </div>

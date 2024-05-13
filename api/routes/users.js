@@ -55,17 +55,47 @@ routes.delete('/:id', async (req, res) => {
 
 // getUsers
 // http://localhost:5000/api/users/65e8dee29e5f1045c80a9daa
+// this url is not working because i will change the condition 
+// http://localhost:5000/api/users/?username=Bilal yeah sahi url hai
 
-routes.get('/:id', async (req, res) => {
+// routes.get('/', async (req, res) => {
+//     const userId = req.query.userId;
+//     const username = req.query.username;
+//     try {
+//         const user = userId ? await User.findById(userId) : await User.findOne({username :username})
+//         let  { password, updatedAt, createdAt, ...other } = user._doc;
+//         res.status(200).json(other);
+
+//     } catch (error) {
+//         console.log(error);
+//     }
+// })
+
+routes.get('/', async (req, res) => {
+    const userId = req.query.userId;
+    const username = req.query.username;
     try {
-        const user = await User.findById(req.params.id);
+        let user;
+        if (userId) {
+            user = await User.findById(userId);
+        } else if (username) {
+            user = await User.findOne({ username: username });
+        }
+
+        if (!user) {
+            return res.status(404).json({ error: 'User not found' });
+        }
+
         const { password, updatedAt, createdAt, ...other } = user._doc;
         res.status(200).json(other);
 
     } catch (error) {
         console.log(error);
+        res.status(500).json({ error: 'Internal server error' });
     }
 })
+
+
 // followUser
 
 // http://localhost:5000/api/users/65ef64a92d22975ca517127b/follow

@@ -8,7 +8,7 @@ function Topbar() {
     <div className='topbarcontainer'>
       <div className="topbarLeft">
         <Link to='/' style={{textDecoration:'none'}}>
-        <span className='logo'>bilalSocial</span>
+        <span className='logo'>Mernify</span>
         </Link>      
       </div>
 

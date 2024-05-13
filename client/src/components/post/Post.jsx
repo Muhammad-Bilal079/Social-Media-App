@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react'
 import './post.css'
 import { MoreVert } from '@mui/icons-material'
 import axios from 'axios';
-import {Link} from 'react-router-dom'
+import { Link } from 'react-router-dom'
 import { format } from 'timeago.js'
 // timeago.js help karta hai time batanay main aky post kitni dair pehlay upload hoi hai 
 
@@ -23,8 +23,8 @@ function Post({ post }) {
     // console.log(post.userId);
     useEffect(() => {
         const fetchuser = async () => {
-            const res = await axios.get(`http://localhost:5000/api/users/${post.userId} `)
-             console.log(res);
+            const res = await axios.get(`http://localhost:5000/api/users/?userId=${post.userId} `) //Yeh URL post object se userId property ki value lekar server ko bhejega.
+            // console.log(res);
             setUser(res.data)
         }
         fetchuser()
@@ -43,7 +43,7 @@ function Post({ post }) {
                 <div className="postTop">
                     <div className="postTopLeft">
                         <Link to={`profile/${user.username}`}>
-                        <img className='postProfileImg' src={user.profilePicture || PF + 'person/Noawatar.jpeg'} alt="" />
+                            <img className='postProfileImg' src={user.profilePicture || PF + 'person/Noawatar.jpeg'} alt="" />
                         </Link>
                         <span className="postUsername">{user.username}</span>
                         <span className="postDate">{format(post.createdAt)}</span>
