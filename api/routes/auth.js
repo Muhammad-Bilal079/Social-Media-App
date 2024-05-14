@@ -45,7 +45,7 @@ routes.post("/login", async (req, res) => {
         }
 
         // Agar user aur password sahi hain, toh yahan se aap success response bhej sakte hain
-        res.json({msg: "Login successful"});
+        res.json(user);
     
     } catch (error) {
         // Agar koi error aata hai toh use catch karke response bhejein

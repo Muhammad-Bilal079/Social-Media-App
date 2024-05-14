@@ -20,6 +20,13 @@ const {user} = useContext(AuthContext)
    <Route path="/register" element={user ? redirect("/"):<Register />} />
 </Routes>
 
+{/* <Routes>
+   <Route exact path="/" element={<Home />} />
+   <Route  path="/login" element={<Login />} />
+   <Route path="/profile/:username" element={<Profile />} />
+   <Route path="/register" element={<Register />} />
+</Routes> */}
+
  {/* main home componenet  */}
  {/* <Home /> */}
 

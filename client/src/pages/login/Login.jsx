@@ -9,19 +9,19 @@ function Login() {
   const password = useRef()
   const { user, isFetching, dispatch, error } = useContext(AuthContext);
 
-  const handleClick = (e) => {
+  const handleClick = async (e) => {
     e.preventDefault()
-    loginCall({ email: email.current.value, password: password.current.value  }, dispatch)
-    // console.log(email.current.value , password.current.value);
+    loginCall( {email: email.current.value, password: password.current.value  }, dispatch)
   }
-  console.log(user);
+ console.log(user);
+
   return (
     <div className="login">
       <div className="loginWrapper">
         <div className="loginLeft">
           <h3 className="loginLogo">Mernify</h3>
           <span className="loginDesc">
-            Connect with friends and the world around you on Bilalsocial.
+            Connect with friends and the world around you on Mernify.
           </span>
         </div>
         <div className="loginRight" onSubmit={handleClick}>
