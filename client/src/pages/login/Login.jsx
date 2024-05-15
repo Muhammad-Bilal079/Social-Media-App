@@ -1,4 +1,4 @@
-import React, { useContext, useRef } from 'react'
+import React, { useContext, useEffect, useRef } from 'react'
 import './login.css'
 import { loginCall } from "../../apiCalls"
 import { AuthContext } from '../../context/AuthContext.jsx'
@@ -8,12 +8,23 @@ function Login() {
   const email = useRef()
   const password = useRef()
   const { user, isFetching, dispatch, error } = useContext(AuthContext);
-
+  
+  // const handleClick =  (e) => {
+  //   e.preventDefault()
+  //   loginCall( {email: email.current.value, password: password.current.value  }, dispatch)
+  //   console.log(user);
+  // }
   const handleClick = async (e) => {
-    e.preventDefault()
-    loginCall( {email: email.current.value, password: password.current.value  }, dispatch)
-  }
- console.log(user);
+    e.preventDefault();
+    try {
+      const response = await loginCall({ email: email.current.value, password: password.current.value }, dispatch);
+      console.log(response); // Response from loginCall
+      console.log(user); // Updated user state
+    } catch (error) {
+      console.log(error);
+    }
+  };
+  
 
   return (
     <div className="login">
