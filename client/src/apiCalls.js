@@ -6,7 +6,7 @@ dispatch({type : "LOGIN_START"})
 try {
     const res = await axios.post(' http://localhost:5000/api/auth/login',userCredentials)
     dispatch({type : "LOGIN_SUCCESS",payload:res.data})
-    console.log(res.data);
+    // console.log(res.data);
 } catch (err) {
     dispatch({type : "LOGIN_FAILURE",payload:err}) 
 }

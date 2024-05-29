@@ -5,7 +5,7 @@ import Sidebar from '../../components/sidebar/Sidebar';
 import Right from '../../components/rightbar/Right';
 import Feed from '../../components/feed/Feed';
 import axios from 'axios';
-import { Users } from '../../dummyData';
+// import { Users } from '../../dummyData';
 import { useParams } from 'react-router-dom';
 
 function Profile() {
@@ -41,7 +41,7 @@ function Profile() {
                     <div className="profileRightTop">
                         <div className="profileCover">
                             <img className='profileCoverImg' src={user.coverPicture || PF + 'person/Nocover.jpeg'} alt="" />
-                            <img className='profileUserImg' src={user.profilePicture || PF + 'person/Noawatar.jpeg'} alt="" />
+                            <img className='profileUserImg' src= {user.profilePicture ? PF + user.profilePicture : PF + 'person/Noawatar.jpeg'} alt="" />
                         </div>
 
                         <div className="profileInfo">

@@ -12,7 +12,8 @@ function Topbar() {
   };
   const PF = process.env.REACT_APP_PUBLIC_FOLDER
 
-  const user = useContext(AuthContext);
+  // const user = useContext(AuthContext);
+  const user = JSON.parse(localStorage.getItem("user"))
 
   console.log(user.username);
 
@@ -55,9 +56,9 @@ function Topbar() {
             <span className='topbariconBadge'>1</span>
           </div>
         </div>
-        {/* <Link to={`http://localhost:5173/profile/${user.username}`}> */}
-        <img src={user.profilePicture ? user.profilePicture : PF + 'person/Noawatar.jpeg'} alt="" className='topbarImg' />
-        {/* </Link> */}
+        <Link to={`http://localhost:5173/profile/${user.username}`}>
+          <img src={user.profilePicture ? PF + user.profilePicture : PF + 'person/Noawatar.jpeg'} alt="" className='topbarImg' />
+        </Link>
       </div>
 
 

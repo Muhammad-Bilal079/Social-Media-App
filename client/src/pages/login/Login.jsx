@@ -7,8 +7,9 @@ import { CircularProgress } from '@mui/material'
 function Login() {
   const email = useRef()
   const password = useRef()
-  const { user, isFetching, dispatch, error } = useContext(AuthContext);
-  
+  const { isFetching, dispatch, error } = useContext(AuthContext);
+  const user = JSON.parse(localStorage.getItem("user"))
+
   // const handleClick =  (e) => {
   //   e.preventDefault()
   //   loginCall( {email: email.current.value, password: password.current.value  }, dispatch)
@@ -24,7 +25,7 @@ function Login() {
       console.log(error);
     }
   };
-  
+
 
   return (
     <div className="login">
@@ -39,10 +40,10 @@ function Login() {
           <form className="loginBox">
             <input placeholder="Email" type='email' required ref={email} className="loginInput" />
             <input placeholder="Password" type='password' required ref={password} minLength='5' className="loginInput" />
-            <button className="loginButton" type='submit' disabled={isFetching}>{isFetching ? <CircularProgress color="success" size={30}/> : "Login"} </button>
+            <button className="loginButton" type='submit' disabled={isFetching}>{isFetching ? <CircularProgress color="success" size={30} /> : "Login"} </button>
             <span className="loginForgot">Forgot Password?</span>
             <button className="loginRegisterButton">
-            {isFetching ? <CircularProgress color="success" size={30}/> : "Don't have an account?" }
+              {isFetching ? <CircularProgress color="success" size={30} /> : "Don't have an account?"}
             </button>
           </form>
         </div>

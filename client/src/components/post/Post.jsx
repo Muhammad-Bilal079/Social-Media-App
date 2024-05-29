@@ -1,9 +1,10 @@
-import React, { useEffect, useState } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 import './post.css'
 import { MoreVert } from '@mui/icons-material'
 import axios from 'axios';
 import { Link } from 'react-router-dom'
 import { format } from 'timeago.js'
+import { AuthContext } from '../../context/AuthContext';
 // timeago.js help karta hai time batanay main aky post kitni dair pehlay upload hoi hai 
 
 // yeah env file ko acess karnay kay liay hai 
@@ -19,6 +20,11 @@ function Post({ post }) {
     const [like, setLike] = useState(post.likes.length)
     const [Isliked, setIsliked] = useState(false)
     const [user, setUser] = useState({})
+    const { user: currentUser } = useContext(AuthContext);
+
+    useEffect(() => {
+        setIsliked(post.likes.includes(currentUser._id));
+    }, [currentUser._id, post.likes]);
 
     // console.log(post.userId);
     useEffect(() => {
@@ -30,7 +36,11 @@ function Post({ post }) {
         fetchuser()
     }, [post.userId])
 
+    // like and dislike 
     const likeHandler = () => {
+        try {
+            axios.put("http://localhost:5000/api/posts/" + post._id + "/like", { userId: currentUser._id });
+        } catch (err) { }
         setLike(Isliked ? like - 1 : like + 1)
         setIsliked(!Isliked)
     }
@@ -42,8 +52,8 @@ function Post({ post }) {
 
                 <div className="postTop">
                     <div className="postTopLeft">
-                        <Link to={`profile/${user.username}`}>
-                            <img className='postProfileImg' src={user.profilePicture || PF + 'person/Noawatar.jpeg'} alt="" />
+                        <Link to={`/profile/${user.username}`}>
+                            <img className='postProfileImg' src={user.profilePicture ? PF + user.profilePicture : PF + 'person/Noawatar.jpeg'} alt="" />
                         </Link>
                         <span className="postUsername">{user.username}</span>
                         <span className="postDate">{format(post.createdAt)}</span>
