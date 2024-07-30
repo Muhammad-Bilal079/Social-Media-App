@@ -58,19 +58,6 @@ routes.delete('/:id', async (req, res) => {
 // this url is not working because i will change the condition 
 // http://localhost:5000/api/users/?username=Bilal yeah sahi url hai
 
-// routes.get('/', async (req, res) => {
-//     const userId = req.query.userId;
-//     const username = req.query.username;
-//     try {
-//         const user = userId ? await User.findById(userId) : await User.findOne({username :username})
-//         let  { password, updatedAt, createdAt, ...other } = user._doc;
-//         res.status(200).json(other);
-
-//     } catch (error) {
-//         console.log(error);
-//     }
-// })
-
 routes.get('/', async (req, res) => {
     const userId = req.query.userId;
     const username = req.query.username;
@@ -95,6 +82,26 @@ routes.get('/', async (req, res) => {
     }
 })
 
+//get friends
+routes.get("/friends/:userId", async (req, res) => {
+    try {
+      const user = await User.findById(req.params.userId);
+      const friends = await Promise.all(
+        user.following.map((friendId) => {
+          return User.findById(friendId);
+        })
+      );
+      let friendList = [];
+      friends.map((friend) => {
+        const { _id, username, profilePicture } = friend;
+        friendList.push({ _id, username, profilePicture });
+      });
+      res.status(200).json(friendList)
+    } catch (err) {
+      res.status(500).json(err);
+    }
+  });
+  
 
 // followUser
 

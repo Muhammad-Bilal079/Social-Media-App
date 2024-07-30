@@ -2,6 +2,7 @@ import React, { useContext, useRef, useState } from 'react'
 import './share.css'
 import { EmojiEmotions, Label, PermMedia, Room } from '@mui/icons-material'
 import { AuthContext } from '../../context/AuthContext.jsx'
+import { Link } from 'react-router-dom'
 import axios from "axios";
 
 function Share() {
@@ -22,7 +23,19 @@ function Share() {
         const newPost = {
             userId: user._id,
             desc: desc.current.value,
-        };
+        }
+        if (file) {
+            const data = new FormData();
+            const fileName = Date.now() + file.name;
+            data.append("name", fileName);
+            data.append("file", file);
+            newPost.img = fileName;
+            console.log(newPost);
+            try {
+              await axios.post("http://localhost:5000/api/upload", data);
+            } catch (err) {console.log(err);}
+          }
+
 
         try {
             await axios.post(" http://localhost:5000/api/posts", newPost);
@@ -36,7 +49,9 @@ function Share() {
 
                 <div className="shareWrapper">
                     <div className="shareTop">
+                    <Link to={`http://localhost:5173/profile/${user.username}`}>
                         <img src={user.profilePicture ? PF + user.profilePicture : PF + 'person/Noawatar.jpeg'} alt="" className="shareProfileImg" />
+                       </Link>
                         <input
                             placeholder={'what is in your mind ' + user.username + '?'}
                             className="shareInput"
